@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Disallow: /auth/
+Disallow: /settings
+Disallow: /my-rooms
+
+Sitemap: /sitemap.xml

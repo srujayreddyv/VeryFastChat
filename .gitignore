@@ -1,0 +1,38 @@
+# Node
+node_modules/
+.next/
+out/
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+
+# Env
+.env
+.env.*
+!.env.example
+
+# Hidden directories
+.*/
+!.git/
+
+# OS
+.DS_Store
+
+# Tooling
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+coverage/
+
+# Test artifacts
+test-results/
+playwright-report/
+
+# Build artifacts
+*.egg-info/
+tsconfig.tsbuildinfo
+
+# IDE
+.vscode/

@@ -1,0 +1,25 @@
+[project]
+name = "veryfastchat-api"
+version = "0.1.0"
+description = "FastAPI backend for VeryFastChat"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+  "fastapi>=0.115.0",
+  "uvicorn[standard]>=0.30.0",
+  "pydantic>=2.8.0",
+  "pydantic-settings>=2.3.0",
+  "supabase>=2.10.0",
+  "upstash-redis>=1.0,<2"
+]
+
+[project.optional-dependencies]
+dev = [
+  "pytest>=7.0",
+  "httpx>=0.24",
+  "pytest-asyncio>=0.21"
+]
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
