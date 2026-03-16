@@ -19,6 +19,75 @@
 - Supabase Realtime distributes chat events to subscribed room channels
 - Upstash Redis tracks rate limits (in-memory fallback when unconfigured)
 
+### 2.1 Current Launch Architecture
+
+VeryFastChat is currently in a launch-ready architecture phase:
+
+- the web app renders the product UI and subscribes to realtime room updates
+- the FastAPI service owns writes, moderation actions, and authenticated server-side logic
+- Supabase acts as the system of record for rooms, participants, messages, and profiles
+- Supabase Realtime pushes message and presence updates to connected clients
+- Redis is optional and currently used only for shared rate limiting if enabled
+
+This is the right level of complexity for the current product because it keeps:
+
+- the request path simple
+- operational overhead low
+- deployment and debugging straightforward
+
+### 2.2 Architecture Evolution
+
+#### Phase 1: Launch Architecture
+
+This is the current production shape and is appropriate for launch:
+
+- single frontend application
+- single backend API service
+- Supabase-backed persistence and realtime fanout
+- optional Redis for rate limiting
+- minimal coordination overhead between components
+
+This phase works well as long as:
+
+- the API can handle write traffic directly
+- most side effects stay synchronous
+- realtime fanout is handled acceptably by Supabase Realtime
+
+#### Phase 2: Introduce an Event Layer
+
+An event bus or messaging layer should be introduced only when the system starts showing pressure that justifies asynchronous processing or service decoupling.
+
+Typical triggers:
+
+- multiple API instances coordinating work
+- background workers
+- push notifications
+- analytics processing
+- moderation pipelines
+- search indexing
+
+At that point, the event layer separates user-facing API latency from background work and allows multiple consumers to react to the same domain event.
+
+Typical additions in this phase:
+
+- queue or event bus
+- worker processes
+- explicit event schemas for room, message, and user actions
+
+#### Phase 3: Large-Scale Distributed Architecture
+
+This phase begins when the system needs independent scaling, stronger isolation, and more specialized infrastructure.
+
+Typical characteristics:
+
+- separate chat, moderation, analytics, or indexing services
+- dedicated asynchronous pipelines
+- more advanced observability and tracing
+- independent read/write concerns
+- stronger fault isolation between subsystems
+
+This phase should be driven by real scale or organizational complexity, not by premature architecture expansion.
+
 ## 3. Data Model
 
 ### rooms

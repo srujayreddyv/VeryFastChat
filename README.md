@@ -4,7 +4,36 @@ VeryFastChat is a real-time chat app where anyone can create a room, share a lin
 
 Anonymous use is supported by default. Sign-in is optional and adds persistent room ownership, profiles, and cross-device access.
 
-## Stack
+## Live Demo
+
+- Web: `https://veryfastchat.vercel.app`
+- API: `https://veryfastchat-api.onrender.com`
+
+## Features
+
+### Core Chat
+
+- Create and join rooms via shareable link — no account required
+- Real-time messaging via Supabase Realtime
+- Persistent rooms with saved chat history
+- Host moderation: lock, unlock, end room, delete messages
+
+### Accounts And Identity
+
+- Optional authentication with email/password and Google OAuth
+- User profiles with display name and avatar
+- "My Rooms" dashboard for authenticated users
+
+### Reliability And UX
+
+- Rate limiting per action (create, join, send)
+- Optional Sentry error tracking for API and web
+- PWA support with offline fallback
+- Dark / light / system theme
+
+## Architecture
+
+### Stack
 
 | Layer               | Tech                                         |
 | ------------------- | -------------------------------------------- |
@@ -14,9 +43,20 @@ Anonymous use is supported by default. Sign-in is optional and adds persistent r
 | Auth                | Supabase Auth (email/password, Google OAuth) |
 | Rate Limiting       | Upstash Redis (in-memory fallback)           |
 
-## Repo Layout
+### System Diagram
 
+```mermaid
+flowchart LR
+  U["Users"] --> W["Next.js Web App<br/>Vercel"]
+  W --> A["FastAPI API<br/>Render"]
+  W --> S["Supabase<br/>Auth + Realtime"]
+  A --> S
+  A --> R["Upstash Redis<br/>(optional)"]
 ```
+
+### Repo Layout
+
+```text
 apps/
   web/          Next.js frontend
   api/          FastAPI backend
@@ -26,21 +66,7 @@ docs/
   production-checklist.md   Launch checklist
 ```
 
-## Features
-
-- Create and join rooms via shareable link — no account required
-- Real-time messaging via Supabase Realtime
-- Persistent rooms (no auto-expiration, host ends when done)
-- Host moderation: lock, unlock, end room, delete messages
-- Optional authentication with email/password and Google OAuth
-- User profiles with display name and avatar
-- "My Rooms" dashboard for authenticated users
-- Rate limiting per action (create, join, send)
-- Optional Sentry error tracking for API and web
-- PWA support with offline fallback
-- Dark / light / system theme
-
-## Current Status
+## Project Status
 
 - Supabase is already provisioned and connected for this project
 - Production is live:
@@ -52,7 +78,7 @@ docs/
 - CI is configured with GitHub Actions for backend tests and frontend builds
 - Scheduled production monitoring is configured with GitHub Actions
 
-## Local Development
+## Development
 
 ### API
 
@@ -73,16 +99,16 @@ cp .env.example .env   # fill in Supabase + API URL
 npm run dev
 ```
 
-Open http://localhost:3000
+Open `http://localhost:3000`
 
-### Shortcuts
+### Local Shortcuts
 
 ```bash
 make api   # start API with hot reload
 make web   # start Next.js dev server
 ```
 
-## Testing
+### Testing
 
 ```bash
 # Backend
@@ -92,7 +118,7 @@ cd apps/api && pip install -e ".[dev]" && pytest
 cd apps/web && npx playwright test
 ```
 
-## CI And Monitoring
+### CI And Monitoring
 
 - `/.github/workflows/ci.yml`
   - Runs `pytest` for `/Users/srujayreddy/Projects/VeryFastChat/apps/api`
@@ -104,7 +130,9 @@ cd apps/web && npx playwright test
 
 ## Deployment
 
-See [docs/deployment.md](docs/deployment.md) for full instructions (Vercel + Render/Fly.io/Docker).
+- Web: Vercel
+- API: Render
+- Full instructions: [docs/deployment.md](docs/deployment.md)
 
 ## Documentation
 
@@ -113,3 +141,7 @@ See [docs/deployment.md](docs/deployment.md) for full instructions (Vercel + Ren
 | [Blueprint](docs/blueprint.md)                       | Architecture, data model, API contract |
 | [Deployment](docs/deployment.md)                     | Deploy to production                   |
 | [Production Checklist](docs/production-checklist.md) | Pre/post-launch verification           |
+
+## License
+
+This project is licensed under the MIT License. See [LICENSE](LICENSE).
