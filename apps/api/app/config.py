@@ -6,6 +6,8 @@ class Settings(BaseSettings):
     api_host: str = "0.0.0.0"
     api_port: int = 8000
     skip_startup_validation: bool = False
+    sentry_dsn: str = ""
+    sentry_traces_sample_rate: float = 0.0
     create_room_rate_limit: int = 10
     join_rate_limit: int = 30
     send_message_rate_limit: int = 60

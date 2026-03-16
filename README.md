@@ -36,6 +36,7 @@ docs/
 - User profiles with display name and avatar
 - "My Rooms" dashboard for authenticated users
 - Rate limiting per action (create, join, send)
+- Optional Sentry error tracking for API and web
 - PWA support with offline fallback
 - Dark / light / system theme
 

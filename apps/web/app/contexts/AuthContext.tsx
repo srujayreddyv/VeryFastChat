@@ -1,5 +1,6 @@
 "use client";
 
+import * as Sentry from "@sentry/nextjs";
 import { createContext, useContext, useEffect, useState } from "react";
 import { User, Session } from "@supabase/supabase-js";
 import { getSupabase } from "../../lib/supabase";
@@ -26,12 +27,14 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     supabase.auth.getSession().then(({ data: { session } }: { data: { session: Session | null } }) => {
       setSession(session);
       setUser(session?.user ?? null);
+      Sentry.setUser(session?.user ? { id: session.user.id, email: session.user.email ?? undefined } : null);
       setLoading(false);
     });
 
     const { data: { subscription } } = supabase.auth.onAuthStateChange((_event: string, session: Session | null) => {
       setSession(session);
       setUser(session?.user ?? null);
+      Sentry.setUser(session?.user ? { id: session.user.id, email: session.user.email ?? undefined } : null);
       setLoading(false);
     });
 

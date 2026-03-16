@@ -19,15 +19,7 @@ jobs:
       - name: Check API health endpoint
         run: |
           health_json=$(curl --fail --silent --show-error "$API_URL/health")
-          python - <<'PY' "$health_json"
-import json
-import sys
-
-payload = json.loads(sys.argv[1])
-if payload.get("status") != "ok":
-    raise SystemExit(f"Health check degraded: {payload}")
-print("API health OK")
-PY
+          python -c 'import json, sys; payload = json.loads(sys.argv[1]); assert payload.get("status") == "ok", f"Health check degraded: {payload}"; print("API health OK")' "$health_json"
 
       - name: Write job summary
         run: |

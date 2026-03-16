@@ -26,6 +26,7 @@
    | `NEXT_PUBLIC_API_BASE_URL`      | Your API base URL (e.g. `https://your-api.onrender.com`) |
    | `NEXT_PUBLIC_SUPABASE_URL`      | Supabase project URL                                     |
    | `NEXT_PUBLIC_SUPABASE_ANON_KEY` | Supabase anon key                                        |
+   | `NEXT_PUBLIC_SENTRY_DSN`        | Optional browser Sentry DSN                              |
 
 4. Deploy. Vercel will build and serve the Next.js app.
 
@@ -88,6 +89,8 @@
 | `CORS_ORIGINS`              | ✅ Yes   | Allowed CORS origins (comma-separated) | `https://your-app.vercel.app`    |
 | `API_ENV`                   | No       | Environment name                       | `production`                     |
 | `METRICS_SECRET`            | No       | Secret for /metrics endpoint           | Random string                    |
+| `SENTRY_DSN`                | No       | Server-side Sentry DSN                 | From Sentry project settings     |
+| `SENTRY_TRACES_SAMPLE_RATE` | No       | API trace sampling rate                | `0` to `1.0`                     |
 | `UPSTASH_REDIS_REST_URL`    | No       | Redis URL for rate limiting            | From Upstash dashboard           |
 | `UPSTASH_REDIS_REST_TOKEN`  | No       | Redis token                            | From Upstash dashboard           |
 
@@ -179,6 +182,18 @@ For production, consider:
 - Structured JSON logging
 - Log aggregation (Datadog, Logtail, etc.)
 - Error tracking (Sentry)
+
+### Sentry Setup
+
+This repo supports optional Sentry integration for both services:
+
+- web:
+  - `NEXT_PUBLIC_SENTRY_DSN`
+  - `NEXT_PUBLIC_SENTRY_ENVIRONMENT`
+  - `NEXT_PUBLIC_SENTRY_TRACES_SAMPLE_RATE`
+- API:
+  - `SENTRY_DSN`
+  - `SENTRY_TRACES_SAMPLE_RATE`
 
 ### GitHub Actions Monitoring
 
