@@ -42,10 +42,14 @@ docs/
 ## Current Status
 
 - Supabase is already provisioned and connected for this project
+- Production is live:
+  - Web: `https://veryfastchat.vercel.app`
+  - API: `https://veryfastchat-api.onrender.com`
 - Local verification is green:
   - Backend: `83/83` tests passing
   - Frontend: `37/37` Playwright tests passing
-- Remaining work is primarily deployment, monitoring, and production hardening
+- CI is configured with GitHub Actions for backend tests and frontend builds
+- Scheduled production monitoring is configured with GitHub Actions
 
 ## Local Development
 
@@ -86,6 +90,16 @@ cd apps/api && pip install -e ".[dev]" && pytest
 # Frontend
 cd apps/web && npx playwright test
 ```
+
+## CI And Monitoring
+
+- `/.github/workflows/ci.yml`
+  - Runs `pytest` for `/Users/srujayreddy/Projects/VeryFastChat/apps/api`
+  - Runs `next build` for `/Users/srujayreddy/Projects/VeryFastChat/apps/web`
+- `/.github/workflows/monitoring.yml`
+  - Checks the production web app every 30 minutes
+  - Checks `GET /health` on the production API
+  - Uses only public endpoints, so no GitHub secrets are required
 
 ## Deployment
 

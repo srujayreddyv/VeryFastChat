@@ -180,6 +180,16 @@ For production, consider:
 - Log aggregation (Datadog, Logtail, etc.)
 - Error tracking (Sentry)
 
+### GitHub Actions Monitoring
+
+This repo includes `/.github/workflows/monitoring.yml`, which:
+
+- checks `https://veryfastchat.vercel.app`
+- checks `https://veryfastchat-api.onrender.com/health`
+- uses only public endpoints, so no GitHub repository secrets are required
+
+`/metrics` remains available for authorized operational use, but it is intentionally not queried from GitHub Actions.
+
 ---
 
 ## 7. Performance Tuning
@@ -273,7 +283,7 @@ Adjust in `start.sh` or Dockerfile CMD:
 
 - [ ] Test full user flow (create → join → chat)
 - [ ] Monitor error rates and response times
-- [ ] Set up uptime monitoring
+- [x] Set up uptime monitoring
 - [ ] Configure alerts for health check failures
 
 ---

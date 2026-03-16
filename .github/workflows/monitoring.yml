@@ -1,0 +1,39 @@
+name: Production Monitoring
+
+on:
+  schedule:
+    - cron: "*/30 * * * *"
+  workflow_dispatch:
+
+jobs:
+  production-health:
+    name: Production health checks
+    runs-on: ubuntu-latest
+    env:
+      WEB_URL: https://veryfastchat.vercel.app
+      API_URL: https://veryfastchat-api.onrender.com
+    steps:
+      - name: Check web app homepage
+        run: curl --fail --silent --show-error --location "$WEB_URL" >/dev/null
+
+      - name: Check API health endpoint
+        run: |
+          health_json=$(curl --fail --silent --show-error "$API_URL/health")
+          python - <<'PY' "$health_json"
+import json
+import sys
+
+payload = json.loads(sys.argv[1])
+if payload.get("status") != "ok":
+    raise SystemExit(f"Health check degraded: {payload}")
+print("API health OK")
+PY
+
+      - name: Write job summary
+        run: |
+          {
+            echo "## Production checks passed"
+            echo ""
+            echo "- Web: $WEB_URL"
+            echo "- API: $API_URL/health"
+          } >> "$GITHUB_STEP_SUMMARY"

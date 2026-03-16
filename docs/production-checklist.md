@@ -53,7 +53,7 @@
 - [x] Health check endpoint
 - [x] Metrics tracking (rooms, joins, messages, deletions)
 - [x] Request logging with timing
-- [ ] Set up uptime monitoring (Pingdom, UptimeRobot, etc.)
+- [x] Set up uptime monitoring (GitHub Actions scheduled checks)
 - [ ] Set up error tracking (Sentry, optional)
 - [ ] Set up log aggregation (Datadog, Logtail, optional)
 
@@ -150,7 +150,7 @@
 
 #### Monitoring
 
-- [ ] Uptime monitoring configured
+- [x] Uptime monitoring configured
 - [ ] Health check alerts set up
 - [ ] Error rate alerts (optional)
 - [ ] Performance monitoring (optional)
@@ -181,10 +181,10 @@
 
 ### Monitoring Setup
 
-- [ ] Add API to uptime monitor
-- [ ] Add frontend to uptime monitor
+- [x] Add API to uptime monitor
+- [x] Add frontend to uptime monitor
 - [ ] Set up alert notifications (email, Slack, etc.)
-- [ ] Verify metrics endpoint is accessible
+- [ ] Verify metrics endpoint is accessible from authorized clients only
 - [ ] Check logs are being captured
 
 ### Documentation

@@ -5,6 +5,7 @@ class Settings(BaseSettings):
     api_env: str = "development"
     api_host: str = "0.0.0.0"
     api_port: int = 8000
+    skip_startup_validation: bool = False
     create_room_rate_limit: int = 10
     join_rate_limit: int = 30
     send_message_rate_limit: int = 60

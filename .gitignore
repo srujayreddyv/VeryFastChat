@@ -16,6 +16,9 @@ __pycache__/
 # Hidden directories
 .*/
 !.git/
+!.github/
+!.github/workflows/
+!.github/workflows/**
 
 # OS
 .DS_Store

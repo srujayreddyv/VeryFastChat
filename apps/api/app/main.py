@@ -31,6 +31,10 @@ async def global_exception_handler(request: Request, exc: Exception):
 @app.on_event("startup")
 async def startup_validation():
     """Validate required environment variables on startup."""
+    if settings.skip_startup_validation or settings.api_env == "test":
+        logger.info("Skipping external startup validation in test mode")
+        return
+
     required_vars = {
         "SUPABASE_URL": settings.supabase_url,
         "SUPABASE_SERVICE_ROLE_KEY": settings.supabase_service_role_key,
