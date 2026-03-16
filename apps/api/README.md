@@ -114,6 +114,8 @@ The web app shows a user-friendly message on 429 and supports retry.
 - `WEB_APP_URL` - Frontend URL for CORS and share links (default: `http://localhost:3000`)
 - `CORS_ORIGINS` - Comma-separated allowed origins (default: `http://localhost:3000,http://127.0.0.1:3000`)
 - `METRICS_SECRET` - Secret for `/metrics` endpoint (if unset, endpoint is public)
+- `SENTRY_DSN` - Optional Sentry DSN for API error tracking
+- `SENTRY_TRACES_SAMPLE_RATE` - Optional trace sample rate for Sentry
 - `UPSTASH_REDIS_REST_URL` - Redis URL for distributed rate limiting
 - `UPSTASH_REDIS_REST_TOKEN` - Redis authentication token
 

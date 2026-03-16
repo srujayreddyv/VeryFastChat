@@ -21,17 +21,17 @@
 
 ### CI
 
-- [ ] Confirm the latest GitHub Actions run is green after the action-version bump
+- [x] Confirm the latest GitHub Actions run is green after the action-version bump
 
 ### Error Tracking
 
 - [x] Error tracking wired into code for web and API
-- [ ] Create Sentry project(s)
-- [ ] Add production env vars in Vercel:
+- [x] Create Sentry project(s)
+- [x] Add production env vars in Vercel:
   - `NEXT_PUBLIC_SENTRY_DSN`
   - `NEXT_PUBLIC_SENTRY_ENVIRONMENT`
   - `NEXT_PUBLIC_SENTRY_TRACES_SAMPLE_RATE`
-- [ ] Add production env vars in Render:
+- [x] Add production env vars in Render:
   - `SENTRY_DSN`
   - `SENTRY_TRACES_SAMPLE_RATE`
 - [ ] Trigger a test error and confirm it appears in Sentry

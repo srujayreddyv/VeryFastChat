@@ -11,7 +11,10 @@
 
 - Supabase is already provisioned for this project
 - The app has been verified locally against the live Supabase configuration
-- Deployment work is focused on hosting the API and web app with production env vars
+- Production is live:
+  - web: `https://veryfastchat.vercel.app`
+  - API: `https://veryfastchat-api.onrender.com`
+- This document now serves as the source of truth for redeploys, env changes, and operational setup
 
 ---
 
